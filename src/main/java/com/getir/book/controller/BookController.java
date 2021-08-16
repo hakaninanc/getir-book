@@ -6,6 +6,7 @@ import com.getir.book.impl.extension.exception.ResourceNotFoundException;
 import com.getir.book.model.Book;
 import com.getir.book.service.BookService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/book")
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BookController {
 
     private final BookService bookService;

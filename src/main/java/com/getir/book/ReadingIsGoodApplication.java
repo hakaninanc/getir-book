@@ -5,9 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.web.WebApplicationInitializer;
 
-@SpringBootApplication(scanBasePackageClasses = {PackageMarker.class})
+@SpringBootApplication
 @Slf4j
 public class ReadingIsGoodApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
 
@@ -17,11 +18,6 @@ public class ReadingIsGoodApplication extends SpringBootServletInitializer imple
         } catch (Exception e) {
             log.error(e.getMessage(), e.getMessage());
         }
-    }
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(ReadingIsGoodApplication.class);
     }
 }
 

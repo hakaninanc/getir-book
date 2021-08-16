@@ -4,6 +4,7 @@ import com.getir.book.dao.OrderRepository;
 import com.getir.book.impl.extension.exception.ResourceNotFoundException;
 import com.getir.book.model.Order;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class OrderService {
 
-    final OrderRepository orderRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
-    public OrderService(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
     public Order getOrder(Long orderId) {
 

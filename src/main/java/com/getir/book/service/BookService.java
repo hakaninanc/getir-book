@@ -5,20 +5,26 @@ import com.getir.book.dao.BookRepository;
 import com.getir.book.impl.extension.exception.ResourceNotFoundException;
 import com.getir.book.model.Book;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
 public class BookService {
 
-    final BookRepository bookRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
     public Book createBook(Book book) {
-        bookRepository.save(book);
+        try {
+            book.setId(sequenceGeneratorService.generateSequence(Book.SEQUENCE_NAME));
+            bookRepository.save(book);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e.getMessage());
+        }
         log.info("Create successfull");
         return book;
     }

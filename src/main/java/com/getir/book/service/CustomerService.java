@@ -7,6 +7,7 @@ import com.getir.book.model.Book;
 import com.getir.book.model.Customer;
 import com.getir.book.model.Order;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +16,19 @@ import java.util.List;
 @Slf4j
 public class CustomerService {
 
-    final CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
     public Customer createCustomer(Customer customer) {
-        customerRepository.save(customer);
+        try {
+            customer.setId(sequenceGeneratorService.generateSequence(Customer.SEQUENCE_NAME));
+            customerRepository.save(customer);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e.getMessage());
+        }
         log.info("Create successfull");
         return customer;
     }

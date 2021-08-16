@@ -4,6 +4,7 @@ import com.getir.book.dao.CustomerRepository;
 import com.getir.book.model.Customer;
 import com.getir.book.service.CustomerService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/customer")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class CustomerController {
 
@@ -26,3 +27,4 @@ public class CustomerController {
         return ResponseEntity.ok(newCustomer);
     }
 }
+

@@ -4,4 +4,11 @@ server:
 
 spring:
   application:
-    name: /getir-book
+    name: getir-book
+  data:
+    mongodb:
+      database: BookStore
+      port: 27017
+      host: localhost
+
+
