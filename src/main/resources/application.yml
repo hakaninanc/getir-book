@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /getir-book
+
+spring:
+  application:
+    name: /getir-book
