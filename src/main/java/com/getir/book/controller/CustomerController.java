@@ -1,30 +1,43 @@
 package com.getir.book.controller;
 
-import com.getir.book.dao.CustomerRepository;
 import com.getir.book.model.Customer;
+import com.getir.book.model.Order;
+import com.getir.book.rest.model.CustomerMapper;
+import com.getir.book.rest.model.OrderMapper;
+import com.getir.book.rest.model.request.CustomerRequest;
+import com.getir.book.rest.model.response.CustomerResponse;
+import com.getir.book.rest.model.response.OrderResponse;
 import com.getir.book.service.CustomerService;
-import lombok.AllArgsConstructor;
+import com.getir.book.util.RestResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/api/v1/customer")
 @RequiredArgsConstructor
-@Slf4j
 public class CustomerController {
 
     private final CustomerService customerService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Customer> createCustomer(@Validated @RequestBody Customer customer) {
+    @PostMapping("/save")
+    public ResponseEntity<RestResponse<CustomerResponse>> saveCustomer(@Validated @RequestBody CustomerRequest customerRequest) {
 
-        final Customer newCustomer = customerService.createCustomer(customer);
-        return ResponseEntity.ok(newCustomer);
+        final Customer customer = customerService.saveCustomer(CustomerMapper.INSTANCE.convert(customerRequest));
+        final CustomerResponse customerResponse = CustomerMapper.INSTANCE.convert(customer);
+        return ResponseEntity.ok(RestResponse.of(customerResponse));
+        
+    }
+
+    @GetMapping("/{id}/orders")
+    public ResponseEntity<RestResponse<List<OrderResponse>>> getOrders(@PathVariable(value = "id") Long customerId) {
+
+        final List<Order> orderList = customerService.getOrders(customerId);
+        final List<OrderResponse> orderResponseList = OrderMapper.INSTANCE.convert(orderList);
+        return ResponseEntity.ok(RestResponse.of(orderResponseList));
     }
 }
 
