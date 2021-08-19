@@ -11,4 +11,13 @@ spring:
       port: 27017
       host: localhost
 
+getir-book:
+  username: test
+  password: testpass
+  secretKey: JWTGetirBook
+  expirationInMs: 86400000
 
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
