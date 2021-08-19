@@ -1,0 +1,402 @@
+{
+	"info": {
+		"_postman_id": "dd6302e0-692c-4ce1-80f8-b446e6c09c63",
+		"name": "getir-book",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth Token Service",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"test\",\r\n    \"password\" : \"testpass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/getir-book/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getir-book",
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Authentication"
+			},
+			"response": []
+		},
+		{
+			"name": "Save Customer Service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"hakan\",\r\n    \"surname\": \"inanc\",\r\n    \"mail\": \"hakan@getir.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/getir-book/api/v1/customer/save",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"getir-book",
+						"api",
+						"v1",
+						"customer",
+						"save"
+					]
+				},
+				"description": "Save Customer"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer's Orders Service",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjI5Mjg3NzI2LCJleHAiOjE2MjkzNzQxMjYsInVuaXF1ZVRva2VuS2V5IjoidXNlcjF0b2tlbiJ9.70ZeMWj61mvAXS3Lv7P66FF0CMCE93dCedXjvzdwnTdKuulhBEpGRslURe8A5DuGDewdfUjj5lSky2vBRERYyQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}getir-book/api/v1/customer/1/orders",
+					"host": [
+						"{{baseUrl}}getir-book"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"1",
+						"orders"
+					]
+				},
+				"description": "Get orders of customer"
+			},
+			"response": []
+		},
+		{
+			"name": "Save Book Service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"stock\" : 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/getir-book/api/v1/book/1/stock",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"getir-book",
+						"api",
+						"v1",
+						"book",
+						"1",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Book Stock Service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"stock\" : 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/getir-book/api/v1/book/1/stock",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"getir-book",
+						"api",
+						"v1",
+						"book",
+						"1",
+						"stock"
+					]
+				},
+				"description": "Update stock of book"
+			},
+			"response": []
+		},
+		{
+			"name": "Save Order Service",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjI5MjUzMzczLCJleHAiOjE2MjkzMzk3NzMsInVuaXF1ZVRva2VuS2V5IjoidXNlcjF0b2tlbiJ9.IcEp07oSRjI0EDmXL1ADgml3U5NOpaHiYZZhwgoDx0HxK8WtZAfmE7HD41fUJhwvERszWS1ccdhs-g1dWDbqgQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customerId\": 2,\r\n    \"books\": [\r\n        {\r\n            \"id\": 71,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 72,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/getir-book/api/v1/order/save",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"getir-book",
+						"api",
+						"v1",
+						"order",
+						"save"
+					]
+				},
+				"description": "Save order"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders Service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"stock\" : 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/getir-book/api/v1/order/orders",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"getir-book",
+						"api",
+						"v1",
+						"order",
+						"orders"
+					]
+				},
+				"description": "Get all orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order By Id Service",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"stock\" : 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/getir-book/api/v1/order/55",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"getir-book",
+						"api",
+						"v1",
+						"order",
+						"55"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Statistics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tokenKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"stock\" : 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/getir-book/api/v1/statistics/show",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"getir-book",
+						"api",
+						"v1",
+						"statistics",
+						"show"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

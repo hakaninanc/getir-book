@@ -1,4 +1,4 @@
-package com.getir.book.model;
+package com.getir.book.rest.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Statistics implements Serializable {
+public class StatisticsResponse implements Serializable {
 
     private Long totalOrderCount;
 

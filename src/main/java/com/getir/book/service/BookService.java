@@ -6,8 +6,6 @@ import com.getir.book.model.Book;
 import com.getir.book.model.Order;
 import com.getir.book.rest.model.BookMapper;
 import com.getir.book.rest.model.request.BookDetailRequest;
-import com.getir.book.rest.model.request.BookRequest;
-import com.getir.book.rest.model.response.BookResponse;
 import com.getir.book.util.exception.ResourceNotFoundException;
 import com.getir.book.util.exception.SaveErrorException;
 import lombok.extern.slf4j.Slf4j;
@@ -28,19 +26,18 @@ public class BookService {
     private SequenceGeneratorService sequenceGeneratorService;
 
     public Book saveBook(Book book) {
-        try {
-            book.setId(sequenceGeneratorService.generateSequence(Book.SEQUENCE_NAME));
-            final Book newBook = bookRepository.save(book);
-            log.info("Create successfull");
-
-            return newBook;
-        } catch (SaveErrorException e) {
-            log.error(e.getMessage(), e.getMessage());
-            return null;
+        book.setId(sequenceGeneratorService.generateSequence(Book.SEQUENCE_NAME));
+        final Book newBook = bookRepository.save(book);
+        if (newBook == null || newBook.getId() == null) {
+            throw new SaveErrorException("An error occurred while creating book.");
         }
+
+        log.info("Create successfull");
+
+        return newBook;
     }
 
-    public Book updateBook(Long bookId, BookDetailRequest request) throws ResourceNotFoundException {
+    public Book updateBook(Long bookId, BookDetailRequest request) {
             final Book book = bookRepository.findById(bookId).
                     orElseThrow(() -> new ResourceNotFoundException("Book is not found for this id :: " + bookId));
 
@@ -53,13 +50,9 @@ public class BookService {
     }
 
     public Book findBookById(Long bookId) {
-        try {
-            final Book book = bookRepository.findById(bookId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + bookId));
-            return book;
-        } catch (Exception e) {
-            return null;
-        }
+        final Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found for this id :: " + bookId));
+        return book;
     }
 
 

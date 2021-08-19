@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -48,7 +47,7 @@ public class OrderController {
         return ResponseEntity.ok(RestResponse.of(orderResponseList));
     }
 
-    @PutMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<RestResponse<OrderResponse>> getOrderById(@PathVariable(value = "id") Long orderId) {
 
         final Order order = orderService.getOrder(orderId);

@@ -8,6 +8,7 @@ import com.getir.book.rest.model.request.CustomerRequest;
 import com.getir.book.rest.model.response.CustomerResponse;
 import com.getir.book.rest.model.response.OrderResponse;
 import com.getir.book.service.CustomerService;
+import com.getir.book.service.OrderService;
 import com.getir.book.util.RestResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
+    private final OrderService orderService;
+
     @PostMapping("/save")
     public ResponseEntity<RestResponse<CustomerResponse>> saveCustomer(@Validated @RequestBody CustomerRequest customerRequest) {
 
@@ -35,7 +38,7 @@ public class CustomerController {
     @GetMapping("/{id}/orders")
     public ResponseEntity<RestResponse<List<OrderResponse>>> getOrders(@PathVariable(value = "id") Long customerId) {
 
-        final List<Order> orderList = customerService.getOrders(customerId);
+        final List<Order> orderList = orderService.getCustomersOrders(customerId);
         final List<OrderResponse> orderResponseList = OrderMapper.INSTANCE.convert(orderList);
         return ResponseEntity.ok(RestResponse.of(orderResponseList));
     }

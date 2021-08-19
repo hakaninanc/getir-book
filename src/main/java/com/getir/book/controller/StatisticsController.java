@@ -1,10 +1,10 @@
 package com.getir.book.controller;
 
 
+import com.getir.book.rest.model.response.StatisticsResponse;
 import com.getir.book.service.StatisticsService;
 import com.getir.book.util.RestResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +20,18 @@ public class StatisticsController {
     private StatisticsService statisticsService;
 
     @GetMapping("/show")
-    public ResponseEntity<RestResponse<String>> show() {
+    public ResponseEntity<RestResponse<StatisticsResponse>> show() {
 
         final Long totalOrderCount = statisticsService.getTotalOrderCount();
-//        final Double totalOrderAmount = statisticsService.getTotalOrderAmount();
+        final Double totalOrderAmount = statisticsService.getTotalOrderAmount();
         final Integer totalPurchasedBooksCount = statisticsService.getTotalPurchasedBooksCount();
-        return ResponseEntity.ok(RestResponse.of(totalPurchasedBooksCount + " - " + totalOrderCount));
+
+        final StatisticsResponse statisticsResponse = new StatisticsResponse();
+        statisticsResponse.setTotalOrderCount(totalOrderCount);
+        statisticsResponse.setTotalAmount(totalOrderAmount);
+        statisticsResponse.setTotalPurchasedBooks(totalPurchasedBooksCount);
+
+        return ResponseEntity.ok(RestResponse.of(statisticsResponse));
     }
 
 }
